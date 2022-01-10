@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./style.css">
+    <title>Music Player</title>
+</head>
+<body class='gridCenter minHScreen'>
+    <div class="container flexRow flexCanGrow shadow1" >
+        <div id ='sidebar' class="sidebar z2 shadowQuarter flexCol gapQuarter absoluteTopLeft hFull padding1">
+            <div tabindex=0 class="gridCol2 roundedCorner paddingQH " onclick="toggleClass('sidebar', 'sideOpen')">
+                <i class="fontBold material-icons marginTB0p5 cursorPointer">menu</i>
+                <h1 class='fontBold cursorPointer'>Sidebar</h1>
+            </div>
+            <br>
+            <div tabindex=0 id="nowPlayingBtn" class="sidebarEle gridCol2 roundedCorner cursorPointer paddingQH active" onclick="toggleTab('nowPlaying')">
+                <i class="material-icons marginTB0p5">music_note</i>
+                <h2 class='cursorPointer'>Now playing</h1>
+            </div>
+            <div tabindex=0 id="songListsBtn" class="sidebarEle gridCol2 roundedCorner cursorPointer paddingQH" onclick="toggleTab('songLists')">
+                <i class="material-icons marginTB0p5">library_music</i>
+                <h2 class='cursorPointer'>Songs</h1>
+            </div>
+            <div tabindex=0 id="settingsBtn" class="sidebarEle gridCol2 roundedCorner cursorPointer paddingQH" onclick="toggleTab('settings')">
+                <i class="material-icons  marginTB0p5">settings</i>
+                <h2 class='cursorPointer'>Settings</h1>
+            </div>
+        </div>
+        <div id='nowPlaying' class="window flexCanGrow flexCol" onclick='deFocusSidebar()'>
+            <div class="viewport padding1">
+                    <h1 class='fontSizeQuarter fontBold'>Playing</h1>
+                    <h2 class='fontBold'>GTA SA Theme Song</h2>
+            </div>
+            <div class="viewport gridCenter flexCanGrow padding1">
+                <div class="playGround relative shadow3Quarter gridCenter">
+                    <div class="absoluteTopLeft noBG "><div class="trapezoid"></div></div>
+                    <div class="absoluteTopRight noBG"><div class="trapezoid"></div></div>
+                    <div class="absoluteBottomLeft noBG"><div class="trapezoid"></div></div>
+                    <div class="absoluteBottomRight noBG"><div class="trapezoid"></div></div>
+                    <i id='playGroundIcon' class="material-icons cursordefault animated-rotation roundedCircle fontSize6 paddingHalf shadow3Quarter" style="animation-play-state: paused;">music_note</i>
+                </div>
+            </div>
+            <div class="controlls flexCol justifyEvenly padding1">
+                <div class="flexCol">
+                    <div><span id='elapsed'>xx:xx:xx</span> / <span id='duration'>xx:xx:xx</span></div>
+                    <input type="range" name="seekBar" id="seekBar" min="0" value="0" max="1000" onchange="seeked()" >
+                </div>
+                
+                <div class="flexRow wFull justifyCenter alignCenter gap1">
+                    <i tabindex=0 id='previous' class="material-icons cursorPointer roundedCircle paddingQuarter shadow3Quarter" onclick='playAnother("previous")' onmousedown="mouseDownEffect(previous)" onmouseup="mouseUpEffect(previous)">skip_previous</i>
+                    <i tabindex=0 id='player' class="material-icons cursorPointer fontSize2  roundedCircle paddingHalf shadow3Quarter" onclick='playPause()'  onmousedown="mouseDownEffect(player)"  onmouseup="mouseUpEffect(player)" data-isPlaying='false'>play_circle_outline</i>
+                    <i tabindex=0 id='next' class="material-icons cursorPointer roundedCircle paddingQuarter shadow3Quarter" onclick='playAnother("next")' onmousedown="mouseDownEffect(next)" onmouseup="mouseUpEffect(next)">skip_next</i>
+                </div>
+            </div>
+        </div>
+
+        <div id="songLists" class="window flexCanGrow flexCol hidden padding1 ">
+            <h2 class='fontSize2'>Songs</h2>
+        </div>
+        <div id="settings" class="window flexCanGrow flexCol hidden padding1 gap1">
+            <div class="roundedCorner shadow3Quarter paddingHalf justifyCenter flexRow gap1">
+                <i tabindex=0 class="material-icons cursorPointer roundedCircle paddingQuarter shadow3Quarter " id='repeat' onkeydown, onclick='toggleRepeat()' data-isRepeat ="false">repeat</i>
+                <i tabindex=0 class="material-icons cursorPointer roundedCircle paddingQuarter shadow3Quarter active" id='shuffle' onclick='toggleShuffle()' data-isShuffle ="true">shuffle</i>
+
+            </div>
+            <div class="roundedCorner shadow3Quarter paddingHalf flexRow gap1">
+                <i class="material-icons">speaker</i>
+                <input type="range" name="volume" id="volBar" min=0 value=100 max=100 class="flexCanGrow" onchange="volumeChange()">
+                <span id="vol">100</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./cheatySongsJSON.js">
+    // Because I don't have to use localhost to import json due to CORS Policy
+    // And because I can.
+    // If it has a hacky solution, then it is not a problem. It is just a specific condition with special workaround.
+    // Remember my name for this quote.
+    // One day, cross origin resource sharing policy will noteice this and will do something about it.
+    // Not a Permanent and good solution
+</script>
+<script src="./function.js"></script>
+</html>
